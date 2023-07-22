@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Árbol</title>
+</head>
+<body>
+  <h1>Árbol</h1>
+  <form id="arbol">
+    <label for="pesoRaiz">Peso de la Raíz:</label>
+    <br>
+    <input type="text" id="pesoRaiz" required>
+    <br>
+    <br>
+    <div id="subArbol">
+      <button type="button" onclick="agregarSubArbol()">Agregar Subárbol</button>
+    </div>
+    <br>
+    <button type="submit">Calcular Peso Total</button>
+  </form>
+  <br>
+  <div id="resultado"></div>
+
+  <script>
+    function agregarSubArbol() {
+      const container = document.getElementById('subArbol');
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Peso del Subárbol';
+      container.appendChild(input);
+    }
+
+    function calcularPesoTotal() {
+      event.preventDefault();
+      const pesoRaiz = parseFloat(document.getElementById('pesoRaiz').value) || 0;
+
+      const subtreeInputs = document.querySelectorAll('#subArbol input');
+      let pesoTotal = pesoRaiz;
+
+      for (const input of subtreeInputs) {
+        const subtreeWeight = parseFloat(input.value) || 0;
+        pesoTotal += subtreeWeight;
+      }
+
+      displayResult(pesoTotal);
+    }
+
+    function displayResult(pesoTotal) {
+      const resultElement = document.getElementById('resultado');
+      resultElement.textContent = `El peso total del árbol es: ${pesoTotal}`;
+    }
+
+    document.getElementById('arbol').addEventListener('submit', calcularPesoTotal);
+  </script>
+</body>
+</html>
