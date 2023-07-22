@@ -14,39 +14,39 @@
     <p id="resultado"></p>
 
     <script>
-       function convertir() {
-      const numB10Input = document.getElementById("numB10").value;
-      const baseKInput = document.getElementById("baseK").value;
+      function convertir() {
+        const numB10Input = document.getElementById("numB10").value;
+        const baseKInput = document.getElementById("baseK").value;
 
-      const numB10 = parseInt(numB10Input);
-      const baseK = parseInt(baseKInput);
+        const numB10 = parseInt(numB10Input);
+        const baseK = parseInt(baseKInput);
 
-      if (isNaN(numB10) || isNaN(baseK)) {
-        document.getElementById("resultado").textContent = "Ingrese números válidos en ambos campos.";
-        return;
+        if (isNaN(numB10) || isNaN(baseK)) {
+          document.getElementById("resultado").textContent = "Ingrese números válidos en ambos campos.";
+          return;
+        }
+
+        const resultadoBaseK = convertirBase(numB10, baseK);
+
+        document.getElementById("resultado").textContent = "El número " + numB10 + " en base " + baseK + " es: " + resultadoBaseK;
       }
 
-      const resultadoBaseK = convertirBase(numB10, baseK);
+      function convertirBase(x, k) {
+        if (x === 0) {
+          return "0";
+        }
 
-      document.getElementById("resultado").textContent = "El número " + numB10 + " en base " + baseK + " es: " + resultadoBaseK;
-    }
+        let resultado = "";
+        const caracteresBase = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    function convertirBase(x, k) {
-      if (x === 0) {
-        return "0";
+        while (x > 0) {
+          let residuo = x % k;
+          resultado = caracteresBase[residuo] + resultado; 
+          x = Math.floor(x / k);
+        }
+
+        return resultado;
       }
-
-      let resultado = "";
-      const caracteresBase = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-      while (x > 0) {
-        let residuo = x % k;
-        resultado = caracteresBase[residuo] + resultado; 
-        x = Math.floor(x / k);
-      }
-
-      return resultado;
-    }
     </script>
 </body>
 </html>
